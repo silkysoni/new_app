@@ -1,0 +1,22 @@
+<div class="container mt-1 ">
+  <div class="row d-block mx-auto">
+    <div class="col-md-6 mx-auto border border-black rounded">
+      <div class="d-flex justify-content-start p-0 m-0">
+        <%= button_to raw("<i class='bi bi-arrow-left fs-4 outline-none'></i>"),
+                      product_path,
+                      method: :get,
+                      class: "btn outline-none " %>
+      </div>
+
+
+      <% if @product.image.attached? %>
+        <%= image_tag url_for(@product.image), class: "card-img-top card-img-size border-0", alt: @product.name %>
+      <% else %>
+        <%= image_tag "grey-pant.webp", class: "card-img-top card-img-size", alt: "Description of the image" %>
+      <% end %>
+    </div>
+    
+    <%= render "product_details" %>
+
+  </div>
+</div>

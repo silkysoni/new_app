@@ -1,0 +1,19 @@
+<% if params[:query].present? %>
+    <p>Showing results for: "<%= params[:query] %>"</p>
+
+    <div class="price-range-footer p-3 mt-4 bg-light">
+      <h5>Filter by Price Range</h5>
+      <form method="get" action="<%= request.path %>" id="price-range-form">
+        <input type="hidden" name="query" value="<%= params[:query] %>" />
+
+        <select name="price_range" id="price-range-select" class="form-select" onchange="this.form.submit()">
+          <option value="">Select Price Range</option>
+          <% @price_ranges.each do |range| %>
+            <option value="<%= range[:min] %>,<%= range[:max] %>" <%= "selected" if params[:price_range] == "#{range[:min]},#{range[:max]}" %> >
+              <%= range[:label] %>
+            </option>
+          <% end %>
+        </select>
+      </form>
+    </div>
+  <% end %>

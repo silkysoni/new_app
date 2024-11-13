@@ -1,0 +1,96 @@
+.outline-none {
+    outline: none;
+    border: none; 
+    background-color: transparent;
+  }
+
+  .form-control:focus {
+    outline: none; /* Remove the default outline */
+    box-shadow: none; /* Remove any box-shadow if applicable */
+  }
+  
+  .bi-heart-fill {
+    color: red; 
+  }
+
+  .image-size {
+    width: 100%; /* or any specific width */
+    height: 300px; /* set a specific height */
+    object-fit: cover; /* maintain aspect ratio */
+}
+
+.order-image-size {
+  width: 100%; /* or any specific width */
+  height: 200px; /* set a specific height */
+  object-fit: contain; /* maintain aspect ratio */
+}
+
+.btn:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none; /* Remove any box shadow */
+}
+
+.card-img-size {
+  width: 100%; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 500px; /* Set a max height to prevent overflow */
+  object-fit: contain; /* Ensure the image covers the area */
+}
+
+.shadow-bottom {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjust the values for shadow effect */
+}
+
+.btn-link[disabled] {
+  color: rgb(167, 156, 156)!important; /* Change text color */
+  pointer-events: none; /* Prevent any mouse events */
+  opacity: 0.65; /* Optional: Adjust opacity for a disabled look */
+}
+
+.text-color{
+  color: rgb(71, 62, 62)!important;
+}
+
+.btn-color{
+  background-color: #f1b7ac !important;
+}
+
+.btn-text-size{
+  font-size:small !important;
+  font-weight:500 !important
+}
+
+.my-rich-text img {
+  max-width: 100px; /* Set desired max width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.pagination-link {
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.pagination-link i {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.pagination-link:hover {
+  color: black;
+}
+
+.main-content {
+  padding-top: 100px; 
+}
+
+.pagination-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;            
+  padding: 10px 0;         
+}
+
+

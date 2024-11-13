@@ -1,0 +1,10 @@
+<h1>new</h1>
+<%= form_with(model: [@product, Review.new], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :content %>
+    <%= form.text_area :content, required: true %>
+  </div>
+  <%= form.hidden_field :parent_id, value: @parent_id %> 
+  <p>Parent ID: <%= @parent_id %></p>
+  <%= form.submit "Submit Reply" %>
+<% end %>

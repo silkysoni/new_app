@@ -1,0 +1,21 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    <% if params[:category].present? %>
+      <%= params[:category].capitalize %>  <!-- Display the selected category -->
+    <% else %>
+      Select Category  <!-- Default text if no category is selected -->
+    <% end %>
+  </button>
+  
+  <ul class="dropdown-menu" aria-labelledby="dropdown-toggle">
+    <% if @categories.present? %>
+      <% @categories.each do |category| %>
+        <li>
+          <%= link_to category, product_path(query: params[:query], category: category), class: "dropdown-item" %>
+        </li>
+      <% end %>
+    <% else %>
+      <li>No categories available</li>
+    <% end %>
+  </ul>
+</div>

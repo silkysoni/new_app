@@ -1,0 +1,16 @@
+<% [:notice, :alert, :error].each do |type| %>
+    <% if flash[type] %>
+      <div id=`flash-#{type}` class="alert <%= type == :notice ? 'alert-success' : (type == :alert ? 'alert-warning' : 'alert-danger') %>" role="alert" >
+        <%= flash[type] %>
+      </div>
+    <% end %>
+  <% end %>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+  $('#flash').fadeOut();
+  }, 2000);
+})
+</script>

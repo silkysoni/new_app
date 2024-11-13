@@ -1,0 +1,31 @@
+<% cart_items.each do |cart| %>
+<div class="col-md-3">
+    <div class="card mb-4 shadow-sm">
+        <div class="d-flex justify-content-end">
+            <%= button_to raw("<i class='bi bi-x-lg'></i>"), cart_item_path(cart.id), method: :delete, class: "outline-none p-2 fs-5",
+                                                                                      data: { turbo: false } %>
+        </div>
+             
+        <div>
+            <% if cart.product.image.attached? %>
+              <img src="<%= url_for(cart.product.image) %>" class="image-size card-img-top" alt="<%= cart.product.name %>">
+            <% else %>
+              <%= image_tag "grey-pant.webp", class: "image-size card-img-top", alt: "Description of the image" %>
+            <% end %>
+        </div>
+            
+        <div class="card-body">
+            <h5 class="card-title"><%= cart.product.name %></h5>
+            <p class="card-text">
+                Total Price: <span id="total-price-<%= cart.id %>"><%= cart.product.price * cart.quantity %></span>   
+            </p>
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-decrease btn-text-size btn-color" data-cart-item-id="<%= cart.id %>" data-price="<%= cart.product.price %>">-</button>
+                <span id="quantity-<%= cart.id %>" class="mx-2"><%= cart.quantity %></span>
+                <button type="button" id="btn-increase" class="btn btn-increase btn-text-size btn-color" data-cart-item-id="<%= cart.id %>" data-price="<%= cart.product.price %>">+</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<% end %>

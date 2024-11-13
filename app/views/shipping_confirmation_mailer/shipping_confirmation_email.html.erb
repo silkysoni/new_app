@@ -1,0 +1,17 @@
+<h1>Thank you for your order, <%= @user.name %>!</h1>
+
+<p>Your order has been successfully placed. Here are the details:</p>
+
+<p><strong>Order Number:</strong> <%= @order.id %></p>
+<p><strong>Order Date:</strong> <%= @order.created_at.strftime("%B %d, %Y") %></p>
+
+<h3>Items Ordered:</h3>
+<ul>
+  <% @order.cart_items.each do |item| %>
+    <li><%= item.product.name %> - <%= item.quantity %> x <%= item.product.price %></li>
+  <% end %>
+</ul>
+
+<p>Total: <%= @order.subtotal %></p>
+
+<p>Thank you for shopping with us!</p>

@@ -1,0 +1,32 @@
+<h1 class="text-center">Ordered Items</h1>
+
+<% if @ordered_carts.any? %>
+<div class="container mt-1">
+  <div class="row">
+    <% @ordered_carts.each do |ordered_cart| %>
+      
+      <div class="border border-black p-3 rounded m-3">
+        <h3 class="py-2">Order ID: <%= ordered_cart.id %></h3>
+
+          <%= render "ordered_item", cart_items: ordered_cart.cart_items %>
+          
+        <div class="row">
+        </div>
+        <h3 class="">Subtotal: <%= format_price(ordered_cart.subtotal) %></h3>
+        <%= link_to "Download Invoice", invoice_cart_path(ordered_cart, format: :pdf), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="p-3 d-flex justify-content-center fs-5 pagination-container">
+    <div class="bg-white">
+      <%= link_to_previous_page @ordered_carts, "<i class='bi bi-chevron-left'></i>".html_safe, class: "pagination-link fs-5" %>
+      <span><%= @ordered_carts.current_page %> / <%= @ordered_carts.total_pages %></span>
+      <%= link_to_next_page @ordered_carts, "<i class='bi bi-chevron-right'></i>".html_safe, class: "pagination-link fs-5" %>
+    </div>
+  </div>
+</div>
+  
+<% else %>
+  <h3>No previous orders!</h3>
+<% end %>

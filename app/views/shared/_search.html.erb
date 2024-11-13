@@ -1,0 +1,7 @@
+<%= form_with url: product_path, method: :get, local: true do |form| %>
+    <div class="form-group rounded-pill  d-flex align-items-center px-2 bg-white">
+      <%= form.text_field :query, class: 'form-control rounded-pill border-0 w-100 outline-none',  value: params[:query].presence , placeholder: '' %>
+      <i class="bi bi-search"></i>
+    </div>
+  
+<% end %>

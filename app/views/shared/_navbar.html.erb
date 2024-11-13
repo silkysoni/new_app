@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg py-2 fixed-top " style="background-color:#F8F0E3">
+
+
+  <div class="container-fluid">
+    <a class="navbar-brand text-color" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex justify-content-between" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item d-flex align-items-center">
+          <%= button_to "Home",
+                        product_path,
+                        method: :get,
+                        class: "btn btn-link outline-none text-decoration-none text-color",
+                        data: { turbolinks: false } %>
+        </li>
+      </ul>
+
+       <%= render "shared/search" %>
+
+      <ul class="d-flex align-items-center justify-content-evenly w-25" style="list-style: none; padding: 0; margin: 0;">
+  <li class="nav-item text-decoration-none">
+    <%= button_to raw("<i class='bi bi-heart'></i>"),
+                  wishlist_items_path,
+                  method: :get,
+                  class: "btn btn-link outline-none fs-4 text-black",
+                  data: { turbolinks: false },
+                  disabled: !user_signed_in? %>
+  </li>
+  <li class="nav-item">
+    <%= button_to raw("<i class='bi bi-cart'></i>"),
+                  carts_path,
+                  method: :get,
+                  class: "btn btn-link outline-none fs-4 text-black",
+                  data: { turbolinks: false },
+                  disabled: !user_signed_in? %>
+  </li>
+
+    <%= render "shared/category_dropdown" %>
+  
+  <li>
+    <% if user_signed_in? %>
+      <%= button_to raw("<i class='bi bi-person'></i>"),
+                    edit_user_registration_path,
+                    method: :get,
+                    class: "btn btn-link outline-none fs-4 text-black",
+                    data: { turbolinks: false } %>
+    <% else %> 
+      <%= button_to raw("<i class='bi bi-person'></i>"),
+                    new_user_session_path,
+                    method: :get,
+                    class: "btn btn-link outline-none fs-4 text-black",
+                    data: { turbolinks: false } %>
+    <% end %>
+  </li>
+</ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,41 @@
+
+<% if @wishlist_items.any? %>
+<h1 class="text-center">Wishlist Items</h1>
+  <div class="container mt-1">
+    <div class="row">
+      <% @wishlist_items.each do |wishlist_item| %>
+        <div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+       
+        <div class="card">
+        <div class="d-flex justify-content-end ">
+          
+            <%= button_to raw("<i class='bi bi-x-lg'></i>"), wishlist_item_path(wishlist_item.id), method: :delete, class: "outline-none p-2  fs-5",
+                                                                                                   data: { turbolinks: false } %> 
+
+        </div>
+
+            <% product = wishlist_item.product %> 
+            <div class="p-2">
+            <% if product.image.attached? %>
+              <img src="<%= url_for(product.image) %>" class="image-size card-img-top" alt="<%= product.name %>">
+            <% else %>
+              <%= image_tag "grey-pant.webp", class: "image-size card-img-top", alt: "Description of the image" %>
+            <% end %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text">Price: <%= format_price(product.price) %></p>
+            
+                <%= button_to "ADD TO CART", carts_path(cartitem_id: product.id), method: :post, class: "btn btn-color btn-text-size" %>
+            </div>
+          </div>
+        </div>
+        
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <h3>No items in your wishlist!</h3>
+<% end %>

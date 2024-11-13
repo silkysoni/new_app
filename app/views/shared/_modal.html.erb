@@ -1,0 +1,44 @@
+<div class="modal fade" id="<%= modal_id %>" tabindex="-1" aria-labelledby="<%= modal_id %>Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="<%= modal_id %>Label"><%= modal_title %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+
+      <div class="modal-footer">
+        <%= form_with url: payments_path(@cart), method: :post, local: true, id: "purchase-form" do %>
+          <% if @user.addresses.length > 0 %>
+        <div class="modal-body">
+          <%= yield %>
+          <h5>Select an Address:</h5>
+          <div id="address-selection">
+            <% @user.addresses.each do |address| %>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="selected_address" id="address_<%= address.id %>" value="<%= address.id %>">
+                <label class="form-check-label" for="address_<%= address.id %>">
+                  <%= address.content %>
+                </label>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="modal-body">
+          <p>You have no addresses. <%= link_to "Add your address", edit_user_registration_path %></p>
+        </div>
+      <% end %>
+
+          <%= hidden_field_tag :cart_id, @cart.id %>
+          <div id="hidden-quantities"></div> 
+         
+          <p>Total: <strong id="modal-subtotal-amount"><%= calculate_subtotal(@cart) %></strong></p>
+          
+          <button type="submit" class="btn btn-text-size btn-color" data-turbo="false">BUY NOW</button>
+          
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

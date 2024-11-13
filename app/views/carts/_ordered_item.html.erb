@@ -1,0 +1,17 @@
+<% cart_items.includes(:product).each do |cart_item| %>
+  <div class="col-md-3">
+    <div class="card mb-4 shadow-sm col-12 mb-3">
+      <% if cart_item.product.image.attached? %> 
+        <img src="<%= url_for(cart_item.product.image) %>" class="order-image-size card-img-top" alt="<%= cart_item.product.name %>">
+      <% else %>
+        <%= image_tag "grey-pant.webp", class: "order-image-size card-img-top", alt: "Description of the image" %>
+      <% end %>
+
+      <div class="card-body">
+        <h5 class="card-title"><%= cart_item.product.name %></h5>
+        <p class="card-text">Quantity: <%= cart_item.quantity %></p>
+        <p class="card-text">Total Price: <%= format_price(cart_item.product.price * cart_item.quantity) %></p>
+      </div>
+    </div>
+  </div>
+<% end %>

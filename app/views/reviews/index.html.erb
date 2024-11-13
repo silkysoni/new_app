@@ -1,0 +1,116 @@
+
+<h1 class="text-center mt-0">Reviews</h1>
+
+<div class="w-100 d-flex justify-content-center mt-4">
+  <%= form_with model: @review, url: product_reviews_path, local: true do |form| %>
+
+    <div class="field w-100">
+      <%= form.rich_text_area :content, class: "my-rich-text", direct_upload: true %>
+    </div>
+
+ 
+
+    <div class="d-flex justify-content-center">
+      <%= form.submit "SUBMIT", class: "btn btn-color text-grey fs-7 m-2" %>
+    </div>
+  <% end %>
+</div>
+
+
+<div class="mt-4 d-flex justify-content-center w-100 ">
+  <div class="list-group w-75">
+    <% @product.reviews.each do |review| %>
+
+      <!-- to not display replies twice in parent reviews -->
+      <% if !review.parent_id %>
+
+      
+
+      <div class="list-group-item m-2 border rounded border-1">
+        <h5 class="mb-1"><strong><%= review.user.name %></strong></h5>
+        
+        <% if review.pictures.attached? %>
+          <div class="mb-2">
+            <% review.pictures.each do |picture| %>
+              <%= image_tag picture, class: "img-thumbnail", style: "max-width: 150px; margin-right: 10px;" %> 
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted">No images uploaded.</p>
+        <% end %>
+
+        <p class="mb-1"><%= review.content %></p>
+
+        <div class="d-flex justify-content-between align-items-center">
+        
+        <!-- to give timestamp of only parent review -->
+        <% unless review.parent_id || !review.persisted? %>
+        <small class="text-muted">Posted on: <%= review.created_at.strftime("%B %d, %Y") %></small>
+        <% end %>
+        
+
+        <%= button_to raw("<i class='bi bi-chat'></i>"),
+                      "#",
+                      id: "show-review-form-button",
+                      class: "outline-none text-grey fs-4",
+                      data: { toggle: "modal" } %>
+
+        
+        <div id="review-form-container" style="display: none;">
+        <%= form_with(model: [@product, Review.new], local: true) do |form| %>
+          <div class="form-group">
+            <%= form.label :content %>
+            <%= form.text_area :content, required: true %>
+          </div>
+          <%= form.hidden_field :parent_id, value: review.id %> 
+          <p>Parent ID: <%= review.id %></p>
+          <%= form.submit "Submit Reply" %>
+        <% end %>
+        </div>
+
+                  
+
+        
+
+        <%= link_to raw("<i class='bi bi-chat'></i>"),
+                    new_product_review_path(@product, parent_id: review.id),
+                    method: :get,
+                    class: "outline-none text-grey fs-4 text-black",
+                    remote: true,
+                    data: { toggle: "modal" } %>
+
+        
+        </div>
+
+        <hr>
+          
+          
+        <div class="d-flex justify-content-end w-100">
+        <% if review.replies.any? %>
+        
+        <% review.replies.each do |reply| %> 
+          
+          <div class="reply ">
+          
+              
+                <h6><%= reply.user.name %></h6>
+                <p><%= reply.content %></p>
+              </div>
+          <% end %>
+        <% end %> 
+        </div>
+
+        
+        
+        
+      </div> 
+
+      <% end %>
+    <% end %> 
+  </div>
+  
+</div>
+
+
+
+

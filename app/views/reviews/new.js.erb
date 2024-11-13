@@ -1,0 +1,3 @@
+# document.querySelector("#reply-form-<%= @comment.parent_id %>").innerHTML = ("<%= j render 'reply_form', comment: @comment %>")
+$("#exampleModal .modal-body").html("<%= j render 'form', product: @product, parent_id: @parent_id %>");
+$("#exampleModal").modal("show");

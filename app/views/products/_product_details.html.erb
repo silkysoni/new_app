@@ -1,0 +1,26 @@
+<div class="col-md-6 mx-auto">
+    <h1 class="mb-4 text-color"><%= @product.name %></h1>
+    <p class="h4 text-color ">Price: <%= format_price(@product.price) %></p>
+    <p><%= @product.description %></p>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <% if user_signed_in? %>
+            <%= button_to "ADD TO CART", carts_path(product_id: @product.id), method: :post, class: "btn btn-color text-grey fs-7" %>
+        <% else %>
+            <%= link_to "ADD TO CART", new_user_session_path, class: "btn btn-color text-grey fs-7" %>
+        <% end %>
+
+        <%= button_to raw("<i class='bi bi-heart" + (@wishlist_items.include?(@product.id) ? "-fill" : "") + "'></i>"),
+                      wishlist_items_path(product_id: @product.id),
+                      method: :post,
+                      class: "outline-none fs-4",
+                      data: { turbolinks: false },
+                      disabled: !user_signed_in? %>
+
+        <%= button_to raw("<i class='bi bi-chat'></i>"),
+                      product_reviews_path(product_id: @product.id),
+                      method: :get,
+                      class: "outline-none text-grey fs-4",
+                      disabled: !user_signed_in? %>
+    </div>
+</div>

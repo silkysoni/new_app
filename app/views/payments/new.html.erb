@@ -1,0 +1,19 @@
+<h1>Payment Details</h1>
+
+<p>Subtotal: <strong><%= format_price(@subtotal) %></strong></p>
+
+<%= form_with url: payments_path, method: :post do |form| %>
+    <input type="hidden" name="cart_id" value="<%= params[:cart_id] %>">
+  <input type="hidden" name="subtotal" value="<%= @subtotal %>">
+  <div>
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= form.label :email, "Email" %>
+    <%= form.email_field :email, required: true %>
+  </div>
+  <%= form.hidden_field :subtotal, value: @subtotal %>
+  
+  <%= form.submit "Make Payment", data: { turbo: false } %>
+<% end %>
